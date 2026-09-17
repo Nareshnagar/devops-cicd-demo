@@ -13,6 +13,23 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        - name: Check DOCKER_USERNAME
+  run: |
+    if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
+      echo "DOCKER_USERNAME is EMPTY"
+      exit 1
+    else
+      echo "DOCKER_USERNAME is PRESENT"
+    fi
+
+       - name: Check DOCKER_PASSWORD
+  run: |
+    if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
+      echo "DOCKER_PASSWORD is EMPTY"
+      exit 1
+    else
+      echo "DOCKER_PASSWORD is PRESENT"
+    fi
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
